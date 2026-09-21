@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Flores amarillas 💛</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #fff8c7 0%, #ffe985 40%, #f7cb45 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* -------------------------
+       MENSAJE
+    ------------------------- */
+
+    .message {
+      position: absolute;
+      top: 8%;
+      text-align: center;
+      z-index: 20;
+      opacity: 0;
+      transform: translateY(-25px);
+      animation: showMessage 1.5s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    .message h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: #6b4b00;
+      font-weight: 700;
+      text-shadow: 0 3px 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .message p {
+      margin-top: 10px;
+      color: #8a6300;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+    }
+
+    @keyframes showMessage {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* -------------------------
+       FLOR
+    ------------------------- */
+
+    .flower {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      z-index: 10;
+      transform: translateY(-40px) scale(0);
+      animation: flowerAppear 1.4s cubic-bezier(.2, .9, .3, 1.3) forwards;
+    }
+
+    @keyframes flowerAppear {
+      to {
+        transform: translateY(-40px) scale(1);
+      }
+    }
+
+    .petal {
+      position: absolute;
+      width: 80px;
+      height: 130px;
+      left: 90px;
+      top: 10px;
+
+      background: linear-gradient(
+        135deg,
+        #fff66d,
+        #ffd900 55%,
+        #ffbd00
+      );
+
+      border-radius: 50% 50% 45% 45%;
+      transform-origin: 40px 120px;
+
+      box-shadow:
+        inset -8px -8px 15px rgba(255, 170, 0, 0.25),
+        0 8px 15px rgba(130, 85, 0, 0.13);
+    }
+
+    .petal:nth-child(1) {
+      transform: rotate(0deg) translateY(-43px);
+    }
+
+    .petal:nth-child(2) {
+      transform: rotate(45deg) translateY(-43px);
+    }
+
+    .petal:nth-child(3) {
+      transform: rotate(90deg) translateY(-43px);
+    }
+
+    .petal:nth-child(4) {
+      transform: rotate(135deg) translateY(-43px);
+    }
+
+    .petal:nth-child(5) {
+      transform: rotate(180deg) translateY(-43px);
+    }
+
+    .petal:nth-child(6) {
+      transform: rotate(225deg) translateY(-43px);
+    }
+
+    .petal:nth-child(7) {
+      transform: rotate(270deg) translateY(-43px);
+    }
+
+    .petal:nth-child(8) {
+      transform: rotate(315deg) translateY(-43px);
+    }
+
+    .center {
+      position: absolute;
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #8b5a00,
+          #744200 45%,
+          #472500 100%
+        );
+
+      top: 78px;
+      left: 78px;
+      z-index: 15;
+
+      box-shadow:
+        inset 5px 5px 10px rgba(255, 204, 0, 0.25),
+        0 5px 20px rgba(77, 43, 0, 0.25);
+    }
+
+    .center::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+
+      background-image:
+        radial-gradient(#e7a800 2px, transparent 2px);
+
+      background-size: 10px 10px;
+      opacity: 0.55;
+    }
+
+    /* -------------------------
+       TALLO
+    ------------------------- */
+
+    .stem {
+      position: absolute;
+      width: 16px;
+      height: 330px;
+      background: linear-gradient(
+        to right,
+        #497d20,
+        #72a832,
+        #3f741a
+      );
+
+      border-radius: 20px;
+      top: calc(50% + 40px);
+      z-index: 2;
+
+      transform-origin: top;
+      transform: scaleY(0);
+      animation: growStem 1.5s ease forwards;
+    }
+
+    @keyframes growStem {
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    /* -------------------------
+       HOJAS
+    ------------------------- */
+
+    .leaf {
+      position: absolute;
+      width: 100px;
+      height: 55px;
+
+      background: linear-gradient(
+        135deg,
+        #7ebc35,
+        #3e791c
+      );
+
+      border-radius: 100% 0 100% 0;
+
+      z-index: 3;
+      opacity: 0;
+
+      animation: showLeaf 1s ease forwards;
+      animation-delay: 1.3s;
+    }
+
+    .leaf.left {
+      top: calc(50% + 180px);
+      left: calc(50% - 100px);
+      transform: rotate(15deg);
+    }
+
+    .leaf.right {
+      top: calc(50% + 245px);
+      left: calc(50% + 5px);
+      transform: scaleX(-1) rotate(15deg);
+    }
+
+    @keyframes showLeaf {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* -------------------------
+       BOTÓN
+    ------------------------- */
+
+    .button {
+      position: absolute;
+      bottom: 6%;
+      padding: 14px 27px;
+
+      border: none;
+      border-radius: 30px;
+
+      background: #6f4c00;
+      color: white;
+
+      font-size: 1rem;
+      cursor: pointer;
+
+      box-shadow: 0 8px 25px rgba(78, 51, 0, 0.25);
+
+      transition: 0.3s;
+      z-index: 30;
+    }
+
+    .button:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: #513700;
+    }
+
+    /* -------------------------
+       CORAZONES
+    ------------------------- */
+
+    .heart {
+      position: absolute;
+      bottom: -40px;
+
+      color: #fff4a8;
+      font-size: 30px;
+
+      pointer-events: none;
+      animation: floatHeart linear forwards;
+
+      z-index: 1;
+      text-shadow: 0 3px 8px rgba(122, 83, 0, 0.2);
+    }
+
+    @keyframes floatHeart {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5) rotate(0deg);
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform:
+          translateY(-110vh)
+          scale(1.5)
+          rotate(25deg);
+      }
+    }
+
+    /* -------------------------
+       TEXTO SECUNDARIO
+    ------------------------- */
+
+    .dedication {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(71, 47, 0, 0.82);
+      backdrop-filter: blur(10px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition: 0.6s;
+      z-index: 100;
+    }
+
+    .dedication.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .card {
+      background: #fff9d9;
+      width: min(90%, 500px);
+
+      padding: 45px 35px;
+
+      border-radius: 25px;
+
+      text-align: center;
+
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.25);
+
+      transform: scale(0.8);
+      transition: 0.5s;
+    }
+
+    .dedication.active .card {
+      transform: scale(1);
+    }
+
+    .card .flower-icon {
+      font-size: 70px;
+    }
+
+    .card h2 {
+      color: #704d00;
+      font-size: 2rem;
+      margin: 10px 0 20px;
+    }
+
+    .card p {
+      color: #725d25;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .close {
+      margin-top: 25px;
+      border: 0;
+
+      padding: 11px 24px;
+
+      border-radius: 25px;
+
+      background: #e3b800;
+      color: #fff;
+
+      cursor: pointer;
+
+      font-size: 1rem;
+    }
+
+    /* Movimiento suave */
+    .flower {
+      animation:
+        flowerAppear 1.4s cubic-bezier(.2, .9, .3, 1.3) forwards,
+        sway 4s ease-in-out 1.5s infinite alternate;
+    }
+
+    @keyframes sway {
+      from {
+        rotate: -2deg;
+      }
+
+      to {
+        rotate: 2deg;
+      }
+    }
+
+    @media (max-height: 700px) {
+      .flower {
+        scale: 0.75;
+      }
+
+      .stem {
+        height: 240px;
+      }
+
+      .message {
+        top: 3%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container" id="container">
+
+    <section class="message">
+      <h1>Para la mujer más maravillosa 💛</h1>
+      <p>Hoy también mereces flores amarillas.</p>
+    </section>
+
+    <!-- FLOR -->
+    <div class="flower">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+
+      <div class="center"></div>
+    </div>
+
+    <!-- TALLO -->
+    <div class="stem"></div>
+
+    <!-- HOJAS -->
+    <div class="leaf left"></div>
+    <div class="leaf right"></div>
+
+    <!-- BOTÓN -->
+    <button class="button" onclick="openDedication()">
+      Un mensaje para ti 💛
+    </button>
+
+  </main>
+
+  <!-- DEDICATORIA -->
+  <section class="dedication" id="dedication">
+
+    <div class="card">
+
+      <div class="flower-icon">🌻</div>
+
+      <h2>Para ti 💛</h2>
+
+      <p>
+        Una flor amarilla para la mujer más maravillosa,
+        porque personas como tú hacen que hasta los días
+        más normales tengan un poquito más de luz.
+        <br><br>
+        Que nunca te falten motivos para sonreír,
+        sueños por cumplir y flores que te recuerden
+        lo especial que eres. 🌼
+      </p>
+
+      <button class="close" onclick="closeDedication()">
+        💛
+      </button>
+
+    </div>
+
+  </section>
+
+  <script>
+
+    const container = document.getElementById("container");
+    const dedication = document.getElementById("dedication");
+
+
+    // Crear corazones flotando
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.classList.add("heart");
+
+      const icons = ["💛", "✨", "🌼"];
+
+      heart.innerHTML =
+        icons[Math.floor(Math.random() * icons.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.fontSize =
+        (18 + Math.random() * 25) + "px";
+
+      heart.style.animationDuration =
+        (5 + Math.random() * 4) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 9000);
+    }
+
+
+    // Crear decoración continuamente
+    setInterval(createHeart, 550);
+
+
+    // Abrir mensaje
+    function openDedication() {
+
+      dedication.classList.add("active");
+
+      // explosión de corazones
+      for (let i = 0; i < 20; i++) {
+
+        setTimeout(() => {
+          createHeart();
+        }, i * 80);
+
+      }
+    }
+
+
+    // Cerrar mensaje
+    function closeDedication() {
+      dedication.classList.remove("active");
+    }
+
+
+    // Cerrar haciendo click fuera de la tarjeta
+    dedication.addEventListener("click", function(event) {
+
+      if (event.target === dedication) {
+        closeDedication();
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
